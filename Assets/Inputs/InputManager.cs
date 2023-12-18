@@ -36,18 +36,19 @@ public class InputManager : MonoBehaviour
     private void LateUpdate()
     {
         
-#if UNITY_ANDROID
-    if (Input.touchCount == 0 && CurrentPhase == TouchPhases.Ended)
-    {
-       CurrentPhase = TouchPhases.None;
-        // Android에서의 터치 처리 코드
-    }
-#elif UNITY_STANDALONE
+
+#if UNITY_STANDALONE
         if (!Input.GetMouseButtonDown(0) && CurrentPhase == TouchPhases.Ended)
         {
             CurrentPhase = TouchPhases.None;
             // PC에서의 마우스 처리 코드
         }
+#else
+    if (Input.touchCount == 0 && CurrentPhase == TouchPhases.Ended)
+    {
+       CurrentPhase = TouchPhases.None;
+        
+    }
 #endif
     }
 
