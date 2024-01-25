@@ -30,22 +30,12 @@ public class Test : MonoBehaviour
                 Debug.Log("Yes Began");
             }
                 break;
-            case TouchPhases.Hold:
+            case TouchPhases.Held:
             {
                 Debug.Log("Yes HOLD");
             }
                 break;
-            case TouchPhases.Moved:
-            {
-                Debug.Log("Yes MOVED");
-            }
-                break;
-            case TouchPhases.Ended:
-            {
-                Debug.Log("Yes ENDED");
-                begin = false;
-            }
-                break;
+   
         }
     }
 }

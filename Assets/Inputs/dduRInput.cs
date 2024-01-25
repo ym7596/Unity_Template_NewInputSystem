@@ -62,6 +62,33 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Special"",
+                    ""type"": ""Button"",
+                    ""id"": ""87b39cf7-cfd7-4340-bc77-1ea376dbc030"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Wheel"",
+                    ""type"": ""Button"",
+                    ""id"": ""a802a552-9949-4526-88fe-188c0801c810"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""edc0165c-df5d-4f3d-9684-d20e417f0cd6"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -130,6 +157,39 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
                     ""action"": ""Pinch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24ba7a66-fd9d-4496-8012-9320ae11b236"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Special"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd290b05-4da6-4ea8-a6ca-d64fa488c1b5"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Wheel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cfce157a-d913-4d5d-8d48-fc912cc869ac"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -142,6 +202,9 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
         m_dduRAction_Drag = m_dduRAction.FindAction("Drag", throwIfNotFound: true);
         m_dduRAction_Position = m_dduRAction.FindAction("Position", throwIfNotFound: true);
         m_dduRAction_Pinch = m_dduRAction.FindAction("Pinch", throwIfNotFound: true);
+        m_dduRAction_Special = m_dduRAction.FindAction("Special", throwIfNotFound: true);
+        m_dduRAction_Wheel = m_dduRAction.FindAction("Wheel", throwIfNotFound: true);
+        m_dduRAction_Scroll = m_dduRAction.FindAction("Scroll", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,6 +270,9 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_dduRAction_Drag;
     private readonly InputAction m_dduRAction_Position;
     private readonly InputAction m_dduRAction_Pinch;
+    private readonly InputAction m_dduRAction_Special;
+    private readonly InputAction m_dduRAction_Wheel;
+    private readonly InputAction m_dduRAction_Scroll;
     public struct DduRActionActions
     {
         private @DduRInput m_Wrapper;
@@ -215,6 +281,9 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
         public InputAction @Drag => m_Wrapper.m_dduRAction_Drag;
         public InputAction @Position => m_Wrapper.m_dduRAction_Position;
         public InputAction @Pinch => m_Wrapper.m_dduRAction_Pinch;
+        public InputAction @Special => m_Wrapper.m_dduRAction_Special;
+        public InputAction @Wheel => m_Wrapper.m_dduRAction_Wheel;
+        public InputAction @Scroll => m_Wrapper.m_dduRAction_Scroll;
         public InputActionMap Get() { return m_Wrapper.m_dduRAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -236,6 +305,15 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
             @Pinch.started += instance.OnPinch;
             @Pinch.performed += instance.OnPinch;
             @Pinch.canceled += instance.OnPinch;
+            @Special.started += instance.OnSpecial;
+            @Special.performed += instance.OnSpecial;
+            @Special.canceled += instance.OnSpecial;
+            @Wheel.started += instance.OnWheel;
+            @Wheel.performed += instance.OnWheel;
+            @Wheel.canceled += instance.OnWheel;
+            @Scroll.started += instance.OnScroll;
+            @Scroll.performed += instance.OnScroll;
+            @Scroll.canceled += instance.OnScroll;
         }
 
         private void UnregisterCallbacks(IDduRActionActions instance)
@@ -252,6 +330,15 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
             @Pinch.started -= instance.OnPinch;
             @Pinch.performed -= instance.OnPinch;
             @Pinch.canceled -= instance.OnPinch;
+            @Special.started -= instance.OnSpecial;
+            @Special.performed -= instance.OnSpecial;
+            @Special.canceled -= instance.OnSpecial;
+            @Wheel.started -= instance.OnWheel;
+            @Wheel.performed -= instance.OnWheel;
+            @Wheel.canceled -= instance.OnWheel;
+            @Scroll.started -= instance.OnScroll;
+            @Scroll.performed -= instance.OnScroll;
+            @Scroll.canceled -= instance.OnScroll;
         }
 
         public void RemoveCallbacks(IDduRActionActions instance)
@@ -275,5 +362,8 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
         void OnDrag(InputAction.CallbackContext context);
         void OnPosition(InputAction.CallbackContext context);
         void OnPinch(InputAction.CallbackContext context);
+        void OnSpecial(InputAction.CallbackContext context);
+        void OnWheel(InputAction.CallbackContext context);
+        void OnScroll(InputAction.CallbackContext context);
     }
 }
