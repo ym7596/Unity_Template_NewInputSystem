@@ -33,8 +33,8 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
                     ""id"": ""19406341-77c6-4131-97a1-14881203d5f7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
-                    ""initialStateCheck"": true
+                    ""interactions"": ""Hold(duration=0.1,pressPoint=0.2)"",
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Drag"",
@@ -73,7 +73,7 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Wheel"",
+                    ""name"": ""WheelButton"",
                     ""type"": ""Button"",
                     ""id"": ""a802a552-9949-4526-88fe-188c0801c810"",
                     ""expectedControlType"": ""Button"",
@@ -89,6 +89,24 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""b836cf95-f314-4214-a5b3-edc1df7be207"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Keys"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f8aa0a9-1ce3-4020-8f6b-c33caed9e4a1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -118,6 +136,17 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""4d1b2531-e504-4600-8b03-285088e3cdc4"",
                     ""path"": ""<Pointer>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""68700788-98b1-4b37-adb0-b86333ff54c8"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -176,7 +205,7 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Wheel"",
+                    ""action"": ""WheelButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -188,6 +217,237 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""bb3889c0-ae22-4bf5-8a23-f167a83bc470"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""63003893-7a49-43d0-9c17-e2f581aef7be"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""3100ea86-5984-4041-a9ee-4d7f64e64b3c"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""2b73940f-f112-41cf-8312-7aad130575e8"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""34128123-fcb2-4b71-af17-9b402884dbb5"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c69fb378-d706-48ae-adc3-1d39d8b47b5f"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Keys"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""803f3877-41d8-4241-982a-997154064991"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Keys"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f9936308-5ed8-4548-9ce2-2c5aa062ebf3"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Keys"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e79000d6-2d4a-4144-bb33-775548293b24"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Keys"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Camera"",
+            ""id"": ""02f6b30e-1c92-4f6f-aaf6-c4ddba763664"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""d890c7f6-2ba1-45ad-b1ba-be189316ec9d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RotateCamera"",
+                    ""type"": ""Value"",
+                    ""id"": ""a8cf8570-4d0b-48d3-bdfa-df3afe2b0d47"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ZoomCamera"",
+                    ""type"": ""Value"",
+                    ""id"": ""ec22ae58-bf74-4905-a21f-114351075df7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MouseMiddle"",
+                    ""type"": ""Button"",
+                    ""id"": ""1289ed80-9b79-49f8-abdc-a6075e41fb89"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""e4a1b570-c476-4735-b56c-27ee8b60f523"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""99c72a39-c270-48a2-bc8c-33b2f7a27e82"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""0b12d3f1-6d31-4d39-88a8-6bffc1c17956"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""691d5233-db8b-4691-b926-c21cd8fbf676"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""76da79ce-8228-4247-b245-a59d6a9b0d88"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc91e6a8-c814-4879-af18-597d34cc17ea"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""83ddeb70-67ec-4af3-a1e6-ff3f007461a0"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ZoomCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb893ff8-1aa1-404e-b106-fd295dd455d1"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMiddle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -203,8 +463,16 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
         m_dduRAction_Position = m_dduRAction.FindAction("Position", throwIfNotFound: true);
         m_dduRAction_Pinch = m_dduRAction.FindAction("Pinch", throwIfNotFound: true);
         m_dduRAction_Special = m_dduRAction.FindAction("Special", throwIfNotFound: true);
-        m_dduRAction_Wheel = m_dduRAction.FindAction("Wheel", throwIfNotFound: true);
+        m_dduRAction_WheelButton = m_dduRAction.FindAction("WheelButton", throwIfNotFound: true);
         m_dduRAction_Scroll = m_dduRAction.FindAction("Scroll", throwIfNotFound: true);
+        m_dduRAction_Move = m_dduRAction.FindAction("Move", throwIfNotFound: true);
+        m_dduRAction_Keys = m_dduRAction.FindAction("Keys", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_Movement = m_Camera.FindAction("Movement", throwIfNotFound: true);
+        m_Camera_RotateCamera = m_Camera.FindAction("RotateCamera", throwIfNotFound: true);
+        m_Camera_ZoomCamera = m_Camera.FindAction("ZoomCamera", throwIfNotFound: true);
+        m_Camera_MouseMiddle = m_Camera.FindAction("MouseMiddle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -271,8 +539,10 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_dduRAction_Position;
     private readonly InputAction m_dduRAction_Pinch;
     private readonly InputAction m_dduRAction_Special;
-    private readonly InputAction m_dduRAction_Wheel;
+    private readonly InputAction m_dduRAction_WheelButton;
     private readonly InputAction m_dduRAction_Scroll;
+    private readonly InputAction m_dduRAction_Move;
+    private readonly InputAction m_dduRAction_Keys;
     public struct DduRActionActions
     {
         private @DduRInput m_Wrapper;
@@ -282,8 +552,10 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
         public InputAction @Position => m_Wrapper.m_dduRAction_Position;
         public InputAction @Pinch => m_Wrapper.m_dduRAction_Pinch;
         public InputAction @Special => m_Wrapper.m_dduRAction_Special;
-        public InputAction @Wheel => m_Wrapper.m_dduRAction_Wheel;
+        public InputAction @WheelButton => m_Wrapper.m_dduRAction_WheelButton;
         public InputAction @Scroll => m_Wrapper.m_dduRAction_Scroll;
+        public InputAction @Move => m_Wrapper.m_dduRAction_Move;
+        public InputAction @Keys => m_Wrapper.m_dduRAction_Keys;
         public InputActionMap Get() { return m_Wrapper.m_dduRAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -308,12 +580,18 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
             @Special.started += instance.OnSpecial;
             @Special.performed += instance.OnSpecial;
             @Special.canceled += instance.OnSpecial;
-            @Wheel.started += instance.OnWheel;
-            @Wheel.performed += instance.OnWheel;
-            @Wheel.canceled += instance.OnWheel;
+            @WheelButton.started += instance.OnWheelButton;
+            @WheelButton.performed += instance.OnWheelButton;
+            @WheelButton.canceled += instance.OnWheelButton;
             @Scroll.started += instance.OnScroll;
             @Scroll.performed += instance.OnScroll;
             @Scroll.canceled += instance.OnScroll;
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Keys.started += instance.OnKeys;
+            @Keys.performed += instance.OnKeys;
+            @Keys.canceled += instance.OnKeys;
         }
 
         private void UnregisterCallbacks(IDduRActionActions instance)
@@ -333,12 +611,18 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
             @Special.started -= instance.OnSpecial;
             @Special.performed -= instance.OnSpecial;
             @Special.canceled -= instance.OnSpecial;
-            @Wheel.started -= instance.OnWheel;
-            @Wheel.performed -= instance.OnWheel;
-            @Wheel.canceled -= instance.OnWheel;
+            @WheelButton.started -= instance.OnWheelButton;
+            @WheelButton.performed -= instance.OnWheelButton;
+            @WheelButton.canceled -= instance.OnWheelButton;
             @Scroll.started -= instance.OnScroll;
             @Scroll.performed -= instance.OnScroll;
             @Scroll.canceled -= instance.OnScroll;
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Keys.started -= instance.OnKeys;
+            @Keys.performed -= instance.OnKeys;
+            @Keys.canceled -= instance.OnKeys;
         }
 
         public void RemoveCallbacks(IDduRActionActions instance)
@@ -356,6 +640,76 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
         }
     }
     public DduRActionActions @dduRAction => new DduRActionActions(this);
+
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
+    private readonly InputAction m_Camera_Movement;
+    private readonly InputAction m_Camera_RotateCamera;
+    private readonly InputAction m_Camera_ZoomCamera;
+    private readonly InputAction m_Camera_MouseMiddle;
+    public struct CameraActions
+    {
+        private @DduRInput m_Wrapper;
+        public CameraActions(@DduRInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Camera_Movement;
+        public InputAction @RotateCamera => m_Wrapper.m_Camera_RotateCamera;
+        public InputAction @ZoomCamera => m_Wrapper.m_Camera_ZoomCamera;
+        public InputAction @MouseMiddle => m_Wrapper.m_Camera_MouseMiddle;
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        public void AddCallbacks(ICameraActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
+            @Movement.started += instance.OnMovement;
+            @Movement.performed += instance.OnMovement;
+            @Movement.canceled += instance.OnMovement;
+            @RotateCamera.started += instance.OnRotateCamera;
+            @RotateCamera.performed += instance.OnRotateCamera;
+            @RotateCamera.canceled += instance.OnRotateCamera;
+            @ZoomCamera.started += instance.OnZoomCamera;
+            @ZoomCamera.performed += instance.OnZoomCamera;
+            @ZoomCamera.canceled += instance.OnZoomCamera;
+            @MouseMiddle.started += instance.OnMouseMiddle;
+            @MouseMiddle.performed += instance.OnMouseMiddle;
+            @MouseMiddle.canceled += instance.OnMouseMiddle;
+        }
+
+        private void UnregisterCallbacks(ICameraActions instance)
+        {
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
+            @RotateCamera.started -= instance.OnRotateCamera;
+            @RotateCamera.performed -= instance.OnRotateCamera;
+            @RotateCamera.canceled -= instance.OnRotateCamera;
+            @ZoomCamera.started -= instance.OnZoomCamera;
+            @ZoomCamera.performed -= instance.OnZoomCamera;
+            @ZoomCamera.canceled -= instance.OnZoomCamera;
+            @MouseMiddle.started -= instance.OnMouseMiddle;
+            @MouseMiddle.performed -= instance.OnMouseMiddle;
+            @MouseMiddle.canceled -= instance.OnMouseMiddle;
+        }
+
+        public void RemoveCallbacks(ICameraActions instance)
+        {
+            if (m_Wrapper.m_CameraActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICameraActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CameraActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CameraActions @Camera => new CameraActions(this);
     public interface IDduRActionActions
     {
         void OnTab(InputAction.CallbackContext context);
@@ -363,7 +717,16 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
         void OnPosition(InputAction.CallbackContext context);
         void OnPinch(InputAction.CallbackContext context);
         void OnSpecial(InputAction.CallbackContext context);
-        void OnWheel(InputAction.CallbackContext context);
+        void OnWheelButton(InputAction.CallbackContext context);
         void OnScroll(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
+        void OnKeys(InputAction.CallbackContext context);
+    }
+    public interface ICameraActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+        void OnRotateCamera(InputAction.CallbackContext context);
+        void OnZoomCamera(InputAction.CallbackContext context);
+        void OnMouseMiddle(InputAction.CallbackContext context);
     }
 }
