@@ -750,6 +750,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061b6d4cb896a9447808dd84a6288ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movement:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!4 &867398041
 Transform:
   m_ObjectHideFlags: 0
@@ -1177,3 +1186,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputManager: {fileID: 867398040}
+  _camTransform: {fileID: 330585546}
