@@ -11,7 +11,7 @@ public enum TouchPhases
     Began,
     Moved,
     Held,
-    Canceled
+    Ended
 }
 
 public enum PressedState
@@ -30,6 +30,16 @@ public enum CameraMovement
     Left,
     Up,
     Down
+}
+
+public enum KeyState
+{
+    None,
+    Q,
+    E,
+    F,
+    Space,
+    Shift
 }
 
 // InputManager 클래스 내부에 PressedState를 반환하는 메소드를 추가
@@ -51,23 +61,28 @@ public class InputManager : MonoBehaviour
     
     public Vector2 DragDelta { get; private set; }
     
- 
+    public Vector2 MoveInput { get; private set; }
+    public bool IsMove => !Mathf.Approximately(MoveInput.sqrMagnitude, 0f);
     public TouchPhases CurrentPhase { get; private set; } = TouchPhases.None;
     public TouchPhases CurrentSpecailPhase { get; private set; } = TouchPhases.None;
+    public PressedState CurrentPressedState { get; private set; }
+
     public bool IsUITouched { get; private set; } = false;
     public bool LeftIsClicked => dduRInput.dduRAction.Tab.IsPressed();
     public bool RightIsClicked => dduRInput.dduRAction.Special.IsPressed();
     public bool ScrollIsClicked => dduRInput.dduRAction.WheelButton.IsPressed();
   
     
-    public PressedState CurrentPressedState { get; private set; }
+    
+    public event Action<float> OnActionScrollWheel;//스크롤 False => 아래 True => 위
+    public event Action OnActionFlyToObject;
+    public event Action OnRightClickedReleased;
+    public event Action<Vector2> OnActionWASD;
+    
+    public event Action<InputActionPhase, string> OnKeyboardListener;
+    public event Action<KeyState,InputActionPhase> OnKeyboardState;
 
-    public Action<float> OnActionScrollWheel;//스크롤 False => 아래 True => 위
-    public Action OnActionFlyToObject;
-    public Action OnRightClickedReleased;
-    public Action<Vector2> OnActionWASD;
-    public Action<Vector2> OnActionQE;
-    public Action<InputActionPhase, string> OnKeyboardListener;
+    public event Action<TouchPhases> OnLeftMouseState;
     private void UpdatePressedState()
     {
         if (Input.touchCount > 1)
@@ -179,28 +194,22 @@ public class InputManager : MonoBehaviour
     {
         IsUITouched = IsUITouch();
         UpdatePressedState();
+        OnLeftMouseState?.Invoke(TouchPhases.Began);
         PhaseChange(TouchPhases.Began);
     }
 
     private void OnTabPerformed(InputAction.CallbackContext context)
     {
         UpdatePressedState();
+        OnLeftMouseState?.Invoke(TouchPhases.Moved);
         PhaseChange(TouchPhases.Moved);
-        if (context.interaction is HoldInteraction)
-        {
-            if (CurrentPhase == TouchPhases.Moved)
-                return;
-            _lastPos = Pos;
-            PhaseChange(TouchPhases.Moved);
-            
-        }
     }
     
     private void OnTabCanceled(InputAction.CallbackContext context)
     {
         rayhit = GetRayHit(Pos);
-
-        PhaseChange(TouchPhases.Canceled);
+        OnLeftMouseState?.Invoke(TouchPhases.Ended);
+        PhaseChange(TouchPhases.Ended);
     }
 
 #endregion
@@ -224,20 +233,7 @@ public class InputManager : MonoBehaviour
     private void OnDragPerformed(InputAction.CallbackContext context)
     {
         DragDelta = context.ReadValue<Vector2>();
-   //     Debug.Log($"DragDelta X : {DragDelta.x}");
-      //  Debug.Log($"DragDelta X : {DragDelta.y}");
     }
-
-#endregion
-
-#region Key Mapping
-
-    private void OnPressedKeyCord_F(InputAction.CallbackContext context)
-    {
-        Debug.Log("F Key Pressed!");
-        OnActionFlyToObject?.Invoke();
-    }
-
 
 #endregion
 
@@ -250,13 +246,12 @@ private void OnRightTabStarted(InputAction.CallbackContext context)
 }
 private void OnRightTabPerformed(InputAction.CallbackContext context)
 {
-    Debug.Log("rightclick");
     SpecialChange(TouchPhases.Moved);
 }
 private void OnRightTabCanceled(InputAction.CallbackContext context)
 {
     OnRightClickedReleased?.Invoke();
-    SpecialChange(TouchPhases.Canceled);
+    SpecialChange(TouchPhases.Ended);
 }
 
 #endregion
@@ -289,14 +284,14 @@ private void OnRightTabCanceled(InputAction.CallbackContext context)
 
 #endregion
 
-#region WASDQE
+#region WASDQE_Keys
 
     private void OnWASDPerformed(InputAction.CallbackContext context)
     {
         var keyValue = context.ReadValue<Vector2>();
         OnActionWASD?.Invoke(keyValue);
-        
-     
+        MoveInput = keyValue;
+
         //W : (0,1)
         //A : (-1,0)
         //S : (0,-1)
@@ -306,26 +301,26 @@ private void OnRightTabCanceled(InputAction.CallbackContext context)
     private void OnWASDCanceled(InputAction.CallbackContext context)
     {
         OnActionWASD?.Invoke(Vector2.zero);
+        MoveInput = Vector2.zero;
     }
 
     private void OnKeysPerformed(InputAction.CallbackContext context)
     {
         var phase = context.phase;
         var key = context.control.displayName;
-     
-        OnKeyboardListener?.Invoke(phase,key);
+
+       // Debug.Log(key);
+        var keyToEnum = StringToEnum<KeyState>(key);
+        
+        OnKeyboardState?.Invoke(keyToEnum,phase);
     }
 
-  
-
-   
-
+    
 #endregion
     private void PhaseChange(TouchPhases phase)
     {
         if (IsUITouched)
         {
-            Debug.Log("UI!");
             CurrentPhase = TouchPhases.None;
             IsUITouched = false;
             return;
@@ -370,9 +365,22 @@ private void OnRightTabCanceled(InputAction.CallbackContext context)
 
         if (raycastResults.Count > 0)
         {
-            return true;
+            foreach (var r in raycastResults)
+            {
+                if (r.gameObject.layer == LayerMask.NameToLayer("UI"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         return false;
+    }
+
+    T StringToEnum<T>(string e)
+    {
+        return (T)Enum.Parse(typeof(T), e);
     }
 }
