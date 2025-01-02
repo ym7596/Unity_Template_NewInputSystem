@@ -6,8 +6,8 @@ public class RoomUtils
 {
     private GameObject _currentObject;
     private HistoryController _historyController;
-
-    public GameObject GetCurrentObject => _currentObject;
+    private float gridsize = .5f;
+    public GameObject GetObject => _currentObject;
 
     public RoomUtils()
     {
@@ -23,10 +23,6 @@ public class RoomUtils
      *  우클릭시 되돌아가기
      *  undo redo 시스템
      */
-    public void Began()
-    {
-        
-    }
 
     public void SetCurrentObject(GameObject obj)
     {
@@ -38,10 +34,23 @@ public class RoomUtils
 
     public void MoveObject(Vector3 pos)
     {
-        _currentObject.transform.position = pos;
+        _currentObject.transform.position = new Vector3(RoundToNearestGrid(pos.x), 0, RoundToNearestGrid(pos.z));
     }
-
-
+    
+    private float RoundToNearestGrid(float pos)
+    {
+        float xDiff = pos % gridsize;
+        pos -= xDiff;
+        if (xDiff > (gridsize / 2))
+        {
+            pos += gridsize;
+        }
+        return pos;
+    }
+    
+    
+    
+#region UndoRedo 시스템
     public void ApplyTranform(Transform newTransform)
     {
         ItemHistory itemHistory = new ItemHistory(_currentObject, _currentObject.transform);
@@ -57,4 +66,6 @@ public class RoomUtils
     {
         _historyController.Redo();
     }
+    
+#endregion
 }

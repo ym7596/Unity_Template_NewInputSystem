@@ -6,7 +6,7 @@ using UnityEngine;
 public class RoomEditor : MonoBehaviour
 {
     [SerializeField]  private InputManager _inputManager;
-    [SerializeField] private Transform _camTransform;
+    [SerializeField] private Camera _camTransform;
 
     private RoomUtils _roomUtils;
     private CameraController _camController;
@@ -15,18 +15,27 @@ public class RoomEditor : MonoBehaviour
 
     private GameObject testTarget;
     private Items _targetItem;
-   
+
+    private Vector3 _touchPos = Vector3.zero;
+    
     private bool begin = false;
+    
 
     private void Start()
     {
-        _camController = new CameraController(_camTransform,_inputManager);
+        _camController = new CameraController(_camTransform.transform,_inputManager);
         _roomUtils = new RoomUtils();
     }
 
     private void OnEnable()
     {
         _inputManager.OnLeftMouseState += SetPhase;
+        _inputManager.OnRightClickedReleased += SetCancel;
+    }
+
+    private void SetCancel()
+    {
+        
     }
 
     private void SetPhase(TouchPhases phase)
@@ -59,7 +68,6 @@ public class RoomEditor : MonoBehaviour
                        _roomUtils.SetCurrentObject(_inputManager.rayhit.collider.gameObject);
                     }
                 }
-                  
                 else
                 {
                     testTarget = null;
@@ -68,15 +76,37 @@ public class RoomEditor : MonoBehaviour
                 break;
         }
     }
-
-    // Update is called once per frame
+    
     void Update()
     { 
         _camController.Update();
-        if (phase == TouchPhases.None)
+        if (phase == TouchPhases.None && _roomUtils.GetObject == null)
             return;
+ 
+        _touchPos = _inputManager.Pos;
 
-        
-      
+        var ray = _camTransform.ScreenPointToRay(_touchPos);
+        if (_roomUtils.GetObject)
+        {
+
+            RaycastHit _hit;
+
+            int layerIndex = LayerMask.NameToLayer("Ground");
+            if (layerIndex == -1)
+            {
+                Debug.LogError("Layer 'Ground' does not exist or is not set properly.");
+                return;
+            }
+
+            if (Physics.Raycast(ray, out _hit, 500, 1 << layerIndex))
+            {
+                _roomUtils.MoveObject(_hit.point);
+            }
+            else
+            {
+                Debug.Log("Raycast did not hit any object in 'Ground' layer.");
+            }
+        }
+
     }
 }
