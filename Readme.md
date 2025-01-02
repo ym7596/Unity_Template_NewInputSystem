@@ -15,6 +15,10 @@ Touch의
 
 **Ended일때 RayCast를 쏘아서 Collider를 감지합니다.**
 **Began, Hold, Ended때 UI를 모두 감지합니다.**
+# 25-01-02
+
+이제 에디터에서 특정 오브젝트를 클릭후 이동하게 하는 데모가 추가됩니다.
+branch - dev/roomEditor에서 업데이트 되게 됩니다.
 
 # 24-02-08
 
