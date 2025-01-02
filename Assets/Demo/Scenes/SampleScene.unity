@@ -751,10 +751,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement:
-    m_Name: 
+    m_Name: Movement
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 69a3ffb5-20ee-48a4-84dd-7dd02a1618e5
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []

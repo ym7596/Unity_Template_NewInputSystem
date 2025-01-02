@@ -33,7 +33,7 @@ public partial class @DduRInput: IInputActionCollection2, IDisposable
                     ""id"": ""19406341-77c6-4131-97a1-14881203d5f7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold(duration=0.1,pressPoint=0.2)"",
+                    ""interactions"": ""Hold(duration=0.5)"",
                     ""initialStateCheck"": false
                 },
                 {

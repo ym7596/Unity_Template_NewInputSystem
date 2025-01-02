@@ -106,13 +106,14 @@ public class InputManager : MonoBehaviour
         CurrentPhase = TouchPhases.None;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (!IsTouchOrClickActive())
         {
             UpdatePressedState();
             PhaseChange(TouchPhases.None);
             SpecialChange(TouchPhases.None);
+            OnLeftMouseState?.Invoke(TouchPhases.None);
         }
     }
 
@@ -203,6 +204,13 @@ public class InputManager : MonoBehaviour
         UpdatePressedState();
         OnLeftMouseState?.Invoke(TouchPhases.Moved);
         PhaseChange(TouchPhases.Moved);
+        /*if (context.interaction is HoldInteraction)
+        {
+            Debug.Log("Hold");
+            OnLeftMouseState?.Invoke(TouchPhases.Held);
+            PhaseChange(TouchPhases.Held);
+        }*/
+     
     }
     
     private void OnTabCanceled(InputAction.CallbackContext context)
@@ -345,7 +353,7 @@ private void OnRightTabCanceled(InputAction.CallbackContext context)
             Ray ray = Camera.main.ScreenPointToRay(pos);
             if (Physics.Raycast(ray, out hit))
             {
-                //Debug.Log(hit.collider.name);
+                Debug.Log(hit.collider.name);
                 return hit;
             }
         }
