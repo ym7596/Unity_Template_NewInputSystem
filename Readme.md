@@ -15,6 +15,12 @@ Touch의
 
 **Ended일때 RayCast를 쏘아서 Collider를 감지합니다.**
 **Began, Hold, Ended때 UI를 모두 감지합니다.**
+
+# 25-01-03
+
+Undo Redo 커맨드패턴 시스템 통합되었습니다.
+Demo/Scenes/EditorScene을 확인하세요
+
 # 25-01-02
 
 이제 에디터에서 특정 오브젝트를 클릭후 이동하게 하는 데모가 추가됩니다.
