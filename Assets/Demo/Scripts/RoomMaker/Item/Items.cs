@@ -19,8 +19,18 @@ public class Items : MonoBehaviour
         
     }
 
-    public void SetClick()
+    public void SetDefault()
     {
-        _meshRenderer.material.color = Color.green;
+        _meshRenderer.material.color = Color.white;
+    }
+
+    public void SetClick(bool isOn)
+    {
+        if(isOn)
+            _meshRenderer.material.color = Color.green;
+        else
+        {
+            _meshRenderer.material.color = Color.red;
+        }
     }
 }

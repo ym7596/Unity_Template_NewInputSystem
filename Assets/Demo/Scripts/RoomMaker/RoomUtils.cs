@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class RoomUtils
 {
-    private GameObject _currentObject;
+    private Items _currentObject = null;
     private HistoryController _historyController;
     private float gridsize = .5f;
-    public GameObject GetObject => _currentObject;
+    public GameObject GetObject => _currentObject.gameObject;
 
+    public bool IsObject => _currentObject != null ? true : false;
     public RoomUtils()
     {
         Init();
@@ -17,6 +18,8 @@ public class RoomUtils
     private void Init()
     {
         _historyController = new HistoryController();
+        UIcanvas.Instance.onAction_Redo += Redo;
+        UIcanvas.Instance.onAction_Undo += Undo;
     }
     /*
      *  클릭시 오브젝트 설정
@@ -24,12 +27,21 @@ public class RoomUtils
      *  undo redo 시스템
      */
 
+    public void SetDefault()
+    {
+        if (_currentObject == null)
+            return;
+       // UpdateTransform();
+        _currentObject.SetDefault();
+        _currentObject = null;
+    }
+
     public void SetCurrentObject(GameObject obj)
     {
-        _currentObject = obj;
-        Items item = _currentObject.GetComponent<Items>();
-        item.SetClick();
-        ApplyTranform(_currentObject.transform);
+        _currentObject = obj.GetComponent<Items>();
+      
+        _currentObject.SetClick(true);
+        ApplyTranform();
     }
 
     public void MoveObject(Vector3 pos)
@@ -47,13 +59,18 @@ public class RoomUtils
         }
         return pos;
     }
+
+    public void UpdateTransform()
+    {
+        ApplyTranform();
+    }
     
     
     
 #region UndoRedo 시스템
-    public void ApplyTranform(Transform newTransform)
+    public void ApplyTranform()
     {
-        ItemHistory itemHistory = new ItemHistory(_currentObject, _currentObject.transform);
+        ItemHistory itemHistory = new ItemHistory(GetObject, _currentObject.transform);
         _historyController.ExecuteHistory(itemHistory);
     }
 

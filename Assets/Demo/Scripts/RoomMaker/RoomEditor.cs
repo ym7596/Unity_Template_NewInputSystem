@@ -35,7 +35,7 @@ public class RoomEditor : MonoBehaviour
 
     private void SetCancel()
     {
-        
+        _roomUtils.SetDefault();
     }
 
     private void SetPhase(TouchPhases phase)
@@ -80,9 +80,10 @@ public class RoomEditor : MonoBehaviour
     void Update()
     { 
         _camController.Update();
-        if (phase == TouchPhases.None && _roomUtils.GetObject == null)
+        /*if (phase == TouchPhases.None && _roomUtils.GetObject == null)
+            return;*/
+        if (_roomUtils.IsObject == false)
             return;
- 
         _touchPos = _inputManager.Pos;
 
         var ray = _camTransform.ScreenPointToRay(_touchPos);
